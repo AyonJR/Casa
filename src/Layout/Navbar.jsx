@@ -84,12 +84,14 @@ const Navbar = () => {
                 className="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none dark:bg-gray-100 dark:text-gray-800 focus:dark:bg-gray-50"
               />
             </div>
+            <Link to={'/login'}>
             <button
               type="button"
               className="hidden px-6 py-2 font-semibold rounded lg:block dark:bg-customGreen border-2 border-customGreen dark:text-gray-50 bg-customGreen  "
             >
               Log in
             </button>
+            </Link>
           </div>
           <button title="Open menu" type="button" className="p-4 lg:hidden">
             <svg

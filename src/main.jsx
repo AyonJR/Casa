@@ -7,6 +7,9 @@ import Home from "./Pages/Home.jsx";
 import Details from "./Pages/Details.jsx";
 import Wishlist from "./Pages/Wishlist.jsx";
 import AuthProvider from "./firebase/AuthProvider.jsx";
+import Login from "./Authentication/Login.jsx";
+import Register from "./Authentication/Register.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,8 +28,12 @@ const router = createBrowserRouter([
         element: <Wishlist></Wishlist>,
       },
       {
-        path: "/wishlist",
-        element: <Wishlist></Wishlist>,
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>  ,
       },
     ],
   },

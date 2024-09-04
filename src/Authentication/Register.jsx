@@ -1,64 +1,40 @@
 import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const Login = () => {
+const Register = () => {
+  const { createUser } = useContext(AuthContext);
 
-    const { loginUserWithGoogle, loginUser  } = useContext(AuthContext);
-    const navigate = useNavigate()
-    const location = useLocation()
+  const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        try {
-            await loginUser(email, password);
-            Swal.fire({
-                title: 'Success!',
-                text: 'Logged in with Google successfully',
-                icon: 'success',
-                confirmButtonText: 'Cool'
-            })
-            navigate(location?.state?.from || '/');
-        } catch (error) {
-            console.error("Login Error:", error);
-            Swal.fire({
-                title: 'Error!',
-                text: 'Google login failed',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const userInfo = {
+      name,
+      email,
+      password,
     };
 
-//  google login 
-const handleGoogleLogin = async () => {
-    try {
-          await loginUserWithGoogle();
-            Swal.fire({
-            title: 'Success!',
-            text: 'Logged in with Google successfully',
-            icon: 'success',
-            confirmButtonText: 'Cool'
-        }).then(() => {
-            navigate(location?.state ? location.state : "/");
-        });
-    } catch (error) {
-        console.error("Google login error:", error);
-        Swal.fire({
-            title: 'Error!',
-            text: 'Google login failed',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    }
-};
+    await createUser(email, password);
+    form.reset();
+    navigate("/");
 
+    console.log("User added to the database");
+    Swal.fire({
+      title: "Success!",
+      text: "Signed up successfully",
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+  };
 
 
 
@@ -66,12 +42,11 @@ const handleGoogleLogin = async () => {
 
   return (
     <div>
-    {/* headers */}
-    <div>
-    <div className="relative w-full h-[400px] overflow-hidden">
+      {/* headers */}
+      <div className="relative w-full h-[400px] overflow-hidden">
         <img
           className="w-full h-full object-cover"
-          src="https://i.ibb.co/6HszWw6/aaron-huber-G7s-E2-S4-Lab4-unsplash.jpg"
+          src="https://i.ibb.co/myBXp8M/lotus-design-n-print-AK42-TQRy-Cw-unsplash.jpg"
           alt="Full Image"
         />
 
@@ -81,11 +56,10 @@ const handleGoogleLogin = async () => {
         {/* Centered text */}
         <div className="absolute inset-0 flex justify-center items-center">
           <h1 className="text-white mt-14 text-4xl font-bold">
-            Welcome <span className="text-customGreen">Back!</span>
+            Join <span className="text-customGreen">Us!</span>
           </h1>
         </div>
       </div>
-    </div>
 
       {/* main content */}
       <div className="flex items-center justify-center lg:mt-10">
@@ -97,9 +71,8 @@ const handleGoogleLogin = async () => {
               alt=""
             />
           </div>
-          {/* login form */}
-          <div className="bg-white  bg-opacity-80 p-8 rounded-lg shadow-lg w-full max-w-md">
-            {/* <h2 className="text-3xl font-bold text-center mb-6">Login</h2> */}
+          {/* registration form */}
+          <div className="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-full max-w-md">
             <div className="flex justify-center mb-6">
               <a
                 rel="noopener noreferrer"
@@ -118,7 +91,21 @@ const handleGoogleLogin = async () => {
                 </svg>
               </a>
             </div>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="name"
+                >
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -152,25 +139,19 @@ const handleGoogleLogin = async () => {
                   type="submit"
                   className="w-full bg-customGreen text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                 >
-                  Sign In
+                  Register
                 </button>
               </div>
             </form>
             <div className="text-center text-gray-600 text-sm mt-4">
-              <p>or</p>
-
-              <button onClick={handleGoogleLogin} className="mt-4 w-full bg-white text-slate-900 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline flex items-center justify-center">
-                <FcGoogle className="mr-2" /> Sign in with Google
-              </button>
+           
+              <p className="text-center text-gray-600 text-sm mt-1">
+                Already have an account?{" "}
+                <Link to={"/login"}>
+                  <a className="text-customGreen font-bold">Login</a>
+                </Link>
+              </p>
             </div>
-            <p className="text-center text-gray-600 text-sm mt-4">
-              Don't have an account?{" "}
-              <Link to={'/register'}>
-              <a  className="text-customGreen font-bold">
-                Sign Up
-              </a>
-              </Link>
-            </p>
           </div>
         </div>
       </div>
@@ -178,4 +159,4 @@ const handleGoogleLogin = async () => {
   );
 };
 
-export default Login;
+export default Register;
