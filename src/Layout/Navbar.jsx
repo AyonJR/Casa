@@ -1,52 +1,60 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../firebase/AuthProvider";
 
 const Navbar = () => {
+  const { user, logoutUser } = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error("Failed to logout", error);
+    }
+  };
+
   return (
     <div>
       <header className="p-4 bg-opacity-5 fixed z-10  w-full bg-black dark:text-white">
         <div className="container flex justify-between h-16 mx-auto">
           <ul className="items-stretch hidden space-x-3  lg:flex">
-            
             <Link className="mt-4" to={'/'}>
-            <li className="flex">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-customGreen dark:border-customGreen"
-              >
-                Home
-              </a>
-            </li>
-            </Link>
-            <Link className="mt-4" to="/details">
-
-            <li className="flex  ">
+              <li className="flex">
                 <a
                   rel="noopener noreferrer"
                   href="#"
                   className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-customGreen dark:border-customGreen"
                 >
-                  <span className=""> All Properties</span>
+                  Home
                 </a>
-            </li>
+              </li>
             </Link>
-
+            <Link className="mt-4" to="/details">
+              <li className="flex">
+                <a
+                  rel="noopener noreferrer"
+                  href="#"
+                  className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-customGreen dark:border-customGreen"
+                >
+                  <span className="">All Properties</span>
+                </a>
+              </li>
+            </Link>
             <Link className="mt-4" to={'/wishlist'}>
-            <li className="flex">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-customGreen dark:border-customGreen"
-              >
-                My Wishlist
-              </a>
-            </li>
+              <li className="flex">
+                <a
+                  rel="noopener noreferrer"
+                  href="#"
+                  className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-customGreen dark:border-customGreen"
+                >
+                  My Wishlist
+                </a>
+              </li>
             </Link>
           </ul>
           <a
             rel="noopener noreferrer"
-            href="#"
+            
             aria-label="Back to homepage"
             className="flex items-center p-2"
           >
@@ -84,29 +92,41 @@ const Navbar = () => {
                 className="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none dark:bg-gray-100 dark:text-gray-800 focus:dark:bg-gray-50"
               />
             </div>
-            <Link to={'/login'}>
-            <button
-              type="button"
-              className="hidden px-6 py-2 font-semibold rounded lg:block dark:bg-customGreen border-2 border-customGreen dark:text-gray-50 bg-customGreen  "
-            >
-              Log in
-            </button>
-            </Link>
+
+            {user ? (
+              <button
+                onClick={handleLogout}
+                type="button"
+                className="hidden px-6 py-2 font-semibold rounded lg:block dark:bg-gray-900 border-gray-900 dark:text-customGreen"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="hidden px-6 py-2 font-semibold rounded lg:block dark:bg-customGreen border dark:border-customGreen text-white"
+              >
+                Login
+              </Link>
+            )}
           </div>
-          <button title="Open menu" type="button" className="p-4 lg:hidden">
+          <button title="search" type="button" className="p-4 lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-6 h-6 dark:text-gray-800"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              className="w-6 h-6 dark:text-gray-100"
             >
+              <rect width="256" height="256" fill="none"></rect>
               <path
+                d="M224,56H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V72A16,16,0,0,0,224,56Zm0,128H32V72H224V184Z"
+                fill="none"
+                stroke="currentColor"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
+                strokeWidth="16"
               ></path>
+              <circle cx="188" cy="116" r="12"></circle>
             </svg>
           </button>
         </div>

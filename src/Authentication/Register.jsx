@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -26,15 +27,20 @@ const Register = () => {
     await createUser(email, password);
     form.reset();
     navigate("/");
+    const res = await axios.post('http://localhost:5000/users', userInfo);
+    console.log(res)
+    if(res.data.insertedId){
+    
+      // console.log("User added to the database");
+      Swal.fire({
+        title: "Success!",
+        text: "Signed up successfully",
+        icon: "success",
+        confirmButtonText: "Cool",
+      });
+    }
+    }
 
-    console.log("User added to the database");
-    Swal.fire({
-      title: "Success!",
-      text: "Signed up successfully",
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-  };
 
 
 

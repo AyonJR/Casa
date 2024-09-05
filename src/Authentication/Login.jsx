@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 const Login = () => {
 
-    const { loginUserWithGoogle, loginUser  } = useContext(AuthContext);
+    const { loginUserWithGoogle, loginUser , user  } = useContext(AuthContext);
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -25,6 +25,7 @@ const Login = () => {
                 confirmButtonText: 'Cool'
             })
             navigate(location?.state?.from || '/');
+            console.log(user)
         } catch (error) {
             console.error("Login Error:", error);
             Swal.fire({
@@ -47,6 +48,8 @@ const handleGoogleLogin = async () => {
             confirmButtonText: 'Cool'
         }).then(() => {
             navigate(location?.state ? location.state : "/");
+            console.log(user)
+
         });
     } catch (error) {
         console.error("Google login error:", error);
