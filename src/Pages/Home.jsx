@@ -22,6 +22,7 @@ const Home = () => {
       <div className="mt-24">
         <Testimonials></Testimonials>
       </div>
+     
 
     </div>
   );

@@ -30,7 +30,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="bg-customGreen">
+    <section className="bg-customGreen lg:mx-0 mx-5">
       <div className="container px-6 py-10 mx-auto">
         <h1 className="text-2xl font-semibold text-center text-black capitalize lg:text-3xl">
           What <span className="text-white">clients</span> are saying
@@ -41,11 +41,12 @@ const Testimonials = () => {
           <span className="inline-block w-1 h-1 bg-white rounded-full"></span>
         </div>
 
-        <div className="flex items-start max-w-6xl mx-auto mt-16">
+        <div className="relative flex flex-col items-center max-w-6xl mx-auto mt-16">
+          {/* Navigation Buttons for Larger Devices */}
           <button
             title="left arrow"
             onClick={handlePrev}
-            className="hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 lg:block hover:bg-gray-100"
+            className="hidden lg:block p-2 text-gray-800 transition-colors duration-300 border rounded-full hover:bg-gray-100 absolute left-0"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -63,14 +64,78 @@ const Testimonials = () => {
             </svg>
           </button>
 
-          <div className="flex flex-col items-center justify-center w-full">
+          <button
+            title="right arrow"
+            onClick={handleNext}
+            className="hidden lg:block p-2 text-gray-800 transition-colors duration-300 border rounded-full hover:bg-gray-100 absolute right-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+
+          {/* Navigation Buttons for Mobile */}
+          <button
+            title="left arrow"
+            onClick={handlePrev}
+            className="lg:hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full hover:bg-gray-100 absolute left-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+
+          <button
+            title="right arrow"
+            onClick={handleNext}
+            className="lg:hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full hover:bg-gray-100 absolute right-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+
+          <div className="flex flex-col items-center justify-center w-full px-4 lg:px-0">
             <p className="text-center text-black lg:mx-8 w-full">
               {reviews[currentReview].text}
             </p>
 
             <div className="flex flex-col items-center justify-center mt-8">
               <img
-                className="object-cover rounded-full w-14 h-14"
+                className="object-cover rounded-full w-20 h-20 lg:w-14 lg:h-14"
                 src={reviews[currentReview].image}
                 alt={reviews[currentReview].name}
               />
@@ -101,27 +166,6 @@ const Testimonials = () => {
               </div>
             </div>
           </div>
-
-          <button
-            title="right arrow"
-            onClick={handleNext}
-            className="hidden p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 lg:block hover:bg-gray-100"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

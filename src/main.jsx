@@ -6,34 +6,48 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
 import Details from "./Pages/Details.jsx";
 import Wishlist from "./Pages/Wishlist.jsx";
+import MyWishlist from "./Pages/MyWishlist.jsx";
 import AuthProvider from "./firebase/AuthProvider.jsx";
 import Login from "./Authentication/Login.jsx";
 import Register from "./Authentication/Register.jsx";
+import PrivateRoute from "./Pages/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <App />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/details/:id",
-        element: <Details></Details>,
+        element: (
+          <PrivateRoute>
+            <Details />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/aboutUs",
+        element: <Wishlist />,
       },
       {
         path: "/wishlist",
-        element: <Wishlist></Wishlist>,
+        element: (
+          <PrivateRoute>
+            <MyWishlist />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "/register",
-        element: <Register></Register>  ,
+        element: <Register />,
       },
     ],
   },

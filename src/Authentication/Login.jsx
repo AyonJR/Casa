@@ -5,104 +5,91 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Login = () => {
+  const { loginUserWithGoogle, loginUser, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const { loginUserWithGoogle, loginUser , user  } = useContext(AuthContext);
-    const navigate = useNavigate()
-    const location = useLocation()
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-
-        try {
-            await loginUser(email, password);
-            Swal.fire({
-                title: 'Success!',
-                text: 'Logged in with Google successfully',
-                icon: 'success',
-                confirmButtonText: 'Cool'
-            })
-            navigate(location?.state?.from || '/');
-            console.log(user)
-        } catch (error) {
-            console.error("Login Error:", error);
-            Swal.fire({
-                title: 'Error!',
-                text: 'Google login failed',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
-    };
-
-//  google login 
-const handleGoogleLogin = async () => {
     try {
-          await loginUserWithGoogle();
-            Swal.fire({
-            title: 'Success!',
-            text: 'Logged in with Google successfully',
-            icon: 'success',
-            confirmButtonText: 'Cool'
-        }).then(() => {
-            navigate(location?.state ? location.state : "/");
-            console.log(user)
-
-        });
+      await loginUser(email, password);
+      Swal.fire({
+        title: "Success!",
+        text: "Logged in successfully",
+        icon: "success",
+        confirmButtonText: "Cool",
+      });
+      navigate(location?.state?.from || "/");
+      console.log(user);
     } catch (error) {
-        console.error("Google login error:", error);
-        Swal.fire({
-            title: 'Error!',
-            text: 'Google login failed',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
+      console.error("Login Error:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Login failed",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
-};
+  };
 
-
-
-
-
+  // Google login
+  const handleGoogleLogin = async () => {
+    try {
+      await loginUserWithGoogle();
+      Swal.fire({
+        title: "Success!",
+        text: "Logged in with Google successfully",
+        icon: "success",
+        confirmButtonText: "Cool",
+      }).then(() => {
+        navigate(location?.state ? location.state : "/");
+        console.log(user);
+      });
+    } catch (error) {
+      console.error("Google login error:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Google login failed",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
 
   return (
     <div>
-    {/* headers */}
-    <div>
-    <div className="relative w-full h-[400px] overflow-hidden">
-        <img
-          className="w-full h-full object-cover"
-          src="https://i.ibb.co/6HszWw6/aaron-huber-G7s-E2-S4-Lab4-unsplash.jpg"
-          alt="Full Image"
-        />
+      {/* headers */}
+      <div>
+        <div className="relative w-full h-[300px] sm:h-[400px] overflow-hidden">
+          <img
+            className="w-full h-full object-cover"
+            src="https://i.ibb.co/6HszWw6/aaron-huber-G7s-E2-S4-Lab4-unsplash.jpg"
+            alt="Full Image"
+          />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
-        {/* Centered text */}
-        <div className="absolute inset-0 flex justify-center items-center">
-          <h1 className="text-white mt-14 text-4xl font-bold">
-            Welcome <span className="text-customGreen">Back!</span>
-          </h1>
+          {/* Centered text */}
+          <div className="absolute inset-0 flex justify-center items-center">
+            <h1 className="text-white mt-14 text-3xl sm:text-4xl font-bold">
+              Welcome <span className="text-customGreen">Back!</span>
+            </h1>
+          </div>
         </div>
       </div>
-    </div>
 
       {/* main content */}
-      <div className="flex items-center justify-center lg:mt-10">
-        <div className="flex items-center">
-          <div className="lg:mt-0 ">
-            <img
-              className="w-[600px] h-[500px]"
-              src="https://i.ibb.co/YWQVkJ8/rhema-kallianpur-jb-J-hw2yag-unsplash.jpg"
-              alt=""
-            />
-          </div>
+      <div className="flex items-center justify-center lg:mt-10 px-4">
+        <div className="flex flex-col justify-center lg:flex-row items-center lg:space-x-8 w-full max-w-7xl">
+          
+
           {/* login form */}
-          <div className="bg-white  bg-opacity-80 p-8 rounded-lg shadow-lg w-full max-w-md">
-            {/* <h2 className="text-3xl font-bold text-center mb-6">Login</h2> */}
+          <div className="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-full max-w-md">
             <div className="flex justify-center mb-6">
               <a
                 rel="noopener noreferrer"
@@ -150,30 +137,36 @@ const handleGoogleLogin = async () => {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
+
               <div className="flex items-center justify-between">
                 <button
                   type="submit"
-                  className="w-full bg-customGreen text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                  className="w-full bg-customGreen  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
-                  Sign In
+                  Log In
                 </button>
               </div>
             </form>
-            <div className="text-center text-gray-600 text-sm mt-4">
-              <p>or</p>
-
-              <button onClick={handleGoogleLogin} className="mt-4 w-full bg-white text-slate-900 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline flex items-center justify-center">
-                <FcGoogle className="mr-2" /> Sign in with Google
+            <div className="mt-4">
+              <button
+                onClick={handleGoogleLogin}
+                className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                <FcGoogle className="mr-2" />
+                Continue with Google
               </button>
             </div>
-            <p className="text-center text-gray-600 text-sm mt-4">
-              Don't have an account?{" "}
-              <Link to={'/register'}>
-              <a  className="text-customGreen font-bold">
-                Sign Up
-              </a>
-              </Link>
-            </p>
+            <div className="mt-4 text-center">
+              <p>
+                Don't have an account?{" "}
+                <Link
+                  to="/register"
+                  className="text-customGreen hover:underline"
+                >
+                  Sign up here
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

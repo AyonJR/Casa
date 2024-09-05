@@ -19,7 +19,7 @@ const cardVariants = {
 
 const ChooseUs = () => {
   return (
-    <div>
+    <div className="lg:mx-0 mx-5">
       <div className="relative w-full h-[400px] overflow-hidden">
         <img
           className="w-full h-full object-cover object-center"
@@ -34,13 +34,13 @@ const ChooseUs = () => {
       </div>
 
       {/* why choose us */}
-      <div className="flex justify-center relative bottom-52 space-x-4">
+      <div className="flex flex-col md:flex-row justify-center md:relative md:bottom-52 space-y-4 md:space-x-4 md:space-y-0">
         <motion.div
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.8 }}
           variants={cardVariants}
-          className="bg-base-100 w-[300px] shadow-xl"
+          className="bg-base-100 w-full md:w-[300px] shadow-xl"
         >
           <figure className="px-10 pt-10 flex justify-center">
             <img className="w-20" src="https://i.ibb.co/w6Pwq7b/423483-200.png" alt="" />
@@ -55,7 +55,7 @@ const ChooseUs = () => {
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.8 }}
           variants={cardVariants}
-          className="bg-base-100 w-[300px] shadow-xl"
+          className="bg-base-100 w-full md:w-[300px] shadow-xl"
         >
           <figure className="px-10 pt-10 flex justify-center">
             <img className="w-20" src="https://i.ibb.co/VLD3G6f/3439283.png" alt="" />
@@ -70,7 +70,7 @@ const ChooseUs = () => {
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.8 }}
           variants={cardVariants}
-          className="bg-base-100 w-[300px] shadow-xl"
+          className="bg-base-100 w-full md:w-[300px] shadow-xl"
         >
           <figure className="px-10 pt-10 flex justify-center">
             <img className="w-20" src="https://i.ibb.co/vDtdszy/245904.png" alt="" />
@@ -85,7 +85,7 @@ const ChooseUs = () => {
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.8 }}
           variants={cardVariants}
-          className="bg-base-100 w-[300px] shadow-xl"
+          className="bg-base-100 w-full md:w-[300px] shadow-xl"
         >
           <figure className="px-10 pt-10 flex justify-center">
             <img className="w-20" src="https://i.ibb.co/WWMg8hX/owner.png" alt="" />

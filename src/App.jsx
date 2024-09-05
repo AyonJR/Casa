@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 
 import Navbar from "./Layout/Navbar";
+import Footer from "./Layout/Footer";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <div>
         <Outlet></Outlet>
       </div>
-      
+      <div className="mt-40">
+        <Footer></Footer>
+      </div>
     </>
   );
 }

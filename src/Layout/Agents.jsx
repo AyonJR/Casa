@@ -2,7 +2,7 @@ import React from "react";
 
 const Agents = () => {
   return (
-    <div>
+    <div className="mt-24 lg:0 lg:mx-0 mx-5">
       <section className="bg-white text-black shadow-xl border-t-2  rounded-[40px] border-customGreen ">
         <div className="container px-6 py-10 mx-auto">
           <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-black">
