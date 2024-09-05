@@ -20,8 +20,8 @@ const Wishlist = () => {
         </div>
       </div>
       {/* main content */}
-      <div className="flex items-center gap-5 mx-16 mt-32">
-        <div className="w-1/2">
+      <div className="flex items-center lg:flex-row flex-col-reverse gap-5 lg:mx-16 mx-5 mt-32">
+        <div className="lg:w-1/2">
           <h1 className="text-bg-gray-900 font-bold text-xl">
             About <span className="text-customGreen">Casa</span>
           </h1>
@@ -53,7 +53,7 @@ const Wishlist = () => {
             estate.
           </p>
         </div>
-        <div className="w-1/2 lg:mt-10">
+        <div className="lg:w-1/2 lg:mt-10">
          <img src="https://i.ibb.co/KzqssNY/samantha-gades-Bl-Ih-Vf-Xbi9s-unsplash.jpg" alt="" />
         </div>
       </div>
